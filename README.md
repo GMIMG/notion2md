@@ -2,12 +2,10 @@
 
 Automation convert Exported notion markdown(include img, table)
 
-+-----------------------------------+        +--------------+  
-| Exported notion markdown zip      |        |              |  
-| (Export format : Markdown & CSV,  +------->+ .md + images |  
-|  include subpages : On          ) |        |              |  
-+-----------------------------------+        +--------------+
+Exported notion markdown zip
+(Export format : Markdown & CSV, include subpages : On)
 
+-> .md + images
 
 
 ## Need to
