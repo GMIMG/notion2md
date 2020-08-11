@@ -98,10 +98,11 @@ def main():
 					# markdown 파일 라인별로 읽어서
 					for line in to_edit:
 						# 이미지 경로 찾음
-						match = re.match('\!?\[.+?\]\((.+?)\)', line)
-						if match:
+						if re.match('\!?\[.+?\]\((.+?)\)', line):
+							match = re.match('\!\[.+?\]\((.+?)\)', line)
+							where_csv = line.find('.csv)')
 							# img
-							if line[0] == '!':
+							if match:
 								path_image = unquote(match.group(1))
 								image_name_noext = Path(path_image).stem
 								image_name = Path(path_image).name
@@ -113,12 +114,12 @@ def main():
 								
 								shutil.move(image_path, new_image_path)
 								
-								new_line = f"![image{img_num}_{image_name_noext}](/assets/img/{subject_name}/{image_name})"
+								new_line = f"![image{img_num}_{image_name_noext}](/assets/img/{subject_name}/{image_name})\n"
 								img_num += 1
 								editted.write(new_line)
 							# csv
-							elif line[-6:-1] == '.csv)':
-								with Path(assets_folder, args_csv[line[-38:-6]]).open('r', encoding='utf-8') as csv:
+							elif where_csv != -1:
+								with Path(assets_folder, args_csv[line[where_csv-32:where_csv]]).open('r', encoding='utf-8') as csv:
 									table = Table.parse_csv(csv, ',', '"')
 									editted.write(table.markdown())
 									editted.write('\n')
