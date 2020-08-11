@@ -113,7 +113,7 @@ def main():
 								
 								shutil.move(image_path, new_image_path)
 								
-								new_line = f"![image{img_num}_{image_name_noext}]({subject_name}/{image_name})"
+								new_line = f"![image{img_num}_{image_name_noext}](/assets/img/{subject_name}/{image_name})"
 								img_num += 1
 								editted.write(new_line)
 							# csv
@@ -121,6 +121,7 @@ def main():
 								with Path(assets_folder, args_csv[line[-38:-6]]).open('r', encoding='utf-8') as csv:
 									table = Table.parse_csv(csv, ',', '"')
 									editted.write(table.markdown())
+									editted.write('\n')
 							else:
 								editted.write(line)
 						else:
